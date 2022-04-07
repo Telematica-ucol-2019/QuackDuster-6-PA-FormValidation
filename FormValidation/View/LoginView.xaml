@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormValidation.View.LoginView"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Name" MaxLength="20" Text="{Binding Name}" />
+            <Entry Placeholder="Age" Text="{Binding Age}" />
+            
+            <Button IsEnabled="False" Text="Continue">
+                <Button.Triggers>
+                    
+                    <DataTrigger Binding="{Binding IsValid}" TargetType="Button" Value="true">
+                        <Setter Property="IsEnabled" Value="true"></Setter>
+                    </DataTrigger>
+
+                    <DataTrigger Binding="{Binding IsValid}" TargetType="Button" Value="false">
+                        <Setter Property="IsEnabled" Value="false"></Setter>
+                    </DataTrigger>
+
+                </Button.Triggers>
+            </Button>
+        
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
