@@ -3,17 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FormValidation.View.LoginView"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:vm="clr-namespace:FormValidation.ViewModel" x:DataType="vm:LoginViewModel"
              mc:Ignorable="d"
-             >
+             x:Name="thisUser">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="Name" MaxLength="20" Text="{Binding Name}" />
-            <Entry Placeholder="Age" Text="{Binding Age}" />
+            <Entry Placeholder="Name" MaxLength="20" Keyboard="Text" Text="{Binding Name}" />
+            <Entry Placeholder="Age" Keyboard="Numeric"  Text="{Binding Age}" />
             
             <Button IsEnabled="False" Text="Continue">
                 <Button.Triggers>
-                    
+
                     <DataTrigger Binding="{Binding IsValid}" TargetType="Button" Value="true">
                         <Setter Property="IsEnabled" Value="true"></Setter>
                     </DataTrigger>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
@@ -16,13 +17,21 @@ namespace FormValidation.ViewModel
         public string Name
         {
             get => _name;
-            set { _name = value; Validate(); }
+            set 
+            { 
+                _name = value; 
+                Validate();
+            }
         }
 
         public string Age
         {
             get => _age;
-            set { _age = value; Validate(); }
+            set 
+            { 
+                _age = value; 
+                Validate(); 
+            }
         }
 
         public bool IsValid 
@@ -37,7 +46,7 @@ namespace FormValidation.ViewModel
 
         public void Validate()
         {
-            if (!string.IsNullOrEmpty(Name) && Name.Length < 20 )
+            if(!string.IsNullOrEmpty(Name) && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrEmpty(Age) && Enumerable.Range(20,40).Contains(int.Parse(Age)))
             {
                 IsValid = true;
             }
@@ -53,7 +62,7 @@ namespace FormValidation.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(sender: this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }
